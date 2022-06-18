@@ -3,15 +3,93 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dbproject.mapper.SteamMapper">
+
+    <sql id="SteamColumns">
+        s.appid,
+        s.name,
+        s.release_date,
+        s.english,
+        s.developer,
+        s.publisher,
+        s.platforms,
+        s.required_age,
+        s.categories,
+        s.genres,
+        s.steamspy_tags,
+        s.achievements,
+        s.positive_ratings,
+        s.negative_ratings,
+        s.average_playtime,
+        s.median_playtime,
+        s.owners,
+        s.price,
+        smd.header_image
+    </sql>
+
+    <sql id="SteamJoins">
+        left join steam_media_data smd on s.appid=smd.steam_appid
+    </sql>
+
+    <sql id="SteamDetailJoin">
+        left join steam_description_data sdd on sdd.steam_appid=s.appid left join steam_media_data smd on smd.steam_appid=s.appid left join steam_requirements_data srd on s.appid = srd.steam_appid left join steam_support_info ssi on s.appid = ssi.steam_appid
+    </sql>
+
     <select id="list" resultType="com.example.dbproject.entity.Steam">
-        select * from steam_1
+        select
+            <include refid="SteamColumns"/>
+         from steam s
+            <include refid="SteamJoins"/>
+        <where>
+            <if test="appid != null and appid != ''"> and s.appid = #{appid} </if>
+            <if test="name != null and name != ''"> and s.name LIKE CONCAT('%',#{name},'%') </if>
+            <if test="genres != null and genres != ''"> and s.genres LIKE CONCAT('%',#{genres},'%')</if>
+            <if test="release_date != null and release_date != ''"> and s.release_date LIKE CONCAT(#{release_date},'%')</if>
+            <if test="price_min != null and price_min != ''"> and s.price <![CDATA[ >= ]]> #{price_min} </if>
+            <if test="price_max != null and price_max != ''"> and s.price <![CDATA[ <= ]]> #{price_max} </if>
+            <if test="required_age != null and required_age != ''"> and s.required_age <![CDATA[ >= ]]> #{required_age} </if>
+            <if test="developer != null and developer != ''"> and s.developer = #{developer} </if>
+            <if test="publisher != null and publisher != ''"> and s.publisher = #{publisher} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by s.${sort} ${order}
+            </when>
+            <otherwise>
+                order by s.appid
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
-    <select id="listById" resultType="com.example.dbproject.entity.Steam">
-        select * from steam_1 where appid = #{appid}
+    <select id="DetailList" resultType="com.example.dbproject.entity.SteamDetailed">
+        select *
+        from steam s
+        <include refid="SteamDetailJoin"/>
+        <where>
+            <if test="appid != null and appid != ''"> and s.appid = #{appid} </if>
+            <if test="name != null and name != ''"> and s.name = #{name} </if>
+        </where>
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from steam_1
+        select
+            count(*)
+        from steam s
+            <include refid="SteamJoins" />
+        <where>
+            <if test="appid != null and appid != ''"> and s.appid = #{appid} </if>
+            <if test="name != null and name != ''"> and s.name LIKE CONCAT('%',#{name},'%') </if>
+            <if test="genres != null and genres != ''"> and s.genres LIKE CONCAT('%',#{genres},'%')</if>
+            <if test="release_date != null and release_date != ''"> and s.release_date LIKE CONCAT(#{release_date},'%')</if>
+            <if test="price_min != null and price_min != ''"> and s.price <![CDATA[ >= ]]> #{price_min} </if>
+            <if test="price_max != null and price_max != ''"> and s.price <![CDATA[ <= ]]> #{price_max} </if>
+            <if test="required_age != null and required_age != ''"> and s.required_age <![CDATA[ >= ]]> #{required_age} </if>
+            <if test="developer != null and developer != ''"> and s.developer = #{developer} </if>
+            <if test="publisher != null and publisher != ''"> and s.publisher = #{publisher} </if>
+        </where>
+
     </select>
+
 </mapper>

@@ -1,16 +1,17 @@
-package com.example.dbproject.service;
+package com.example.dbproject.service.Steam;
+
 
 import com.example.dbproject.entity.Steam;
+import com.example.dbproject.entity.SteamDetailed;
 import com.example.dbproject.mapper.SteamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class SteamServiceImpl implements SteamService{
+public class SteamServiceImpl implements SteamService  {
 
     @Autowired
     private SteamMapper steamMapper;
@@ -24,4 +25,7 @@ public class SteamServiceImpl implements SteamService{
     public int count(Map<String, Object> map){
         return steamMapper.count(map);
     }
+
+    @Override
+    public List<SteamDetailed> DetailList(Map<String,Object> map){return steamMapper.DetailList(map);};
 }

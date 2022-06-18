@@ -2,7 +2,7 @@ package com.example.dbproject.entity;
 
 import java.util.Date;
 
-public class Steam {
+public class SteamDetailed {
     private Integer appid;
 
     private String name;
@@ -40,7 +40,35 @@ public class Steam {
     private String price;
 
     //以下都是外键
+    private String detailed_description;
+
+    private String about_the_game;
+
+    private String short_description;
+
     private String header_image;
+
+    private String screenshots;
+
+    private String background;
+
+    private String movies;
+
+    private String pc_requirements;
+
+    private String mac_requirements;
+
+    private String linux_requirements;
+
+    private String minimum;
+
+    private String recommended;
+
+    private String website;
+
+    private String support_url;
+
+    private String support_email;
 
     public Integer getAppid() {
         return appid;
@@ -186,11 +214,123 @@ public class Steam {
         this.price = price;
     }
 
+    public String getDetailed_description() {
+        return detailed_description;
+    }
+
+    public void setDetailed_description(String detailed_description) {
+        this.detailed_description = detailed_description;
+    }
+
+    public String getAbout_the_game() {
+        return about_the_game;
+    }
+
+    public void setAbout_the_game(String about_the_game) {
+        this.about_the_game = about_the_game;
+    }
+
+    public String getShort_description() {
+        return short_description;
+    }
+
+    public void setShort_description(String short_description) {
+        this.short_description = short_description;
+    }
+
     public String getHeader_image() {
         return header_image;
     }
 
     public void setHeader_image(String header_image) {
         this.header_image = header_image;
+    }
+
+    public String getScreenshots() {
+        return screenshots;
+    }
+
+    public void setScreenshots(String screenshots) {
+        this.screenshots = screenshots;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
+    public String getMovies() {
+        return movies;
+    }
+
+    public void setMovies(String movies) {
+        this.movies = movies;
+    }
+
+    public String getPc_requirements() {
+        return pc_requirements;
+    }
+
+    public void setPc_requirements(String pc_requirements) {
+        this.pc_requirements = pc_requirements;
+    }
+
+    public String getMac_requirements() {
+        return mac_requirements;
+    }
+
+    public void setMac_requirements(String mac_requirements) {
+        this.mac_requirements = mac_requirements;
+    }
+
+    public String getLinux_requirements() {
+        return linux_requirements;
+    }
+
+    public void setLinux_requirements(String linux_requirements) {
+        this.linux_requirements = linux_requirements;
+    }
+
+    public String getMinimum() {
+        return minimum;
+    }
+
+    public void setMinimum(String minimum) {
+        this.minimum = minimum;
+    }
+
+    public String getRecommended() {
+        return recommended;
+    }
+
+    public void setRecommended(String recommended) {
+        this.recommended = recommended;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getSupport_url() {
+        return support_url;
+    }
+
+    public void setSupport_url(String support_url) {
+        this.support_url = support_url;
+    }
+
+    public String getSupport_email() {
+        return support_email;
+    }
+
+    public void setSupport_email(String support_email) {
+        this.support_email = support_email;
     }
 }

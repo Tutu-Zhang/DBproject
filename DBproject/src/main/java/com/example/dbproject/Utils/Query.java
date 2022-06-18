@@ -1,4 +1,4 @@
-package com.yizhi.common.utils;
+package com.example.dbproject.Utils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
