@@ -26,6 +26,10 @@ public class PageUtils {
 		this.rows = list;
 		this.total = total;
 	}
+
+	public PageUtils(){
+
+	}
 	
 	public PageUtils(List<?> list, int total,int currPage,int pageSize) {
 		this.rows = list;
